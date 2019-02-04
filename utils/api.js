@@ -29,6 +29,7 @@ import { AsyncStorage } from 'react-native';
 //   }
 // }
 
+const QUIZ_STORAGE_KEY = 'MobileFlashCards:quizzes'
 
 camelCaseTitle = (title) => {
   return title.replace(/\W+(.)/g, (match, chr) => {
@@ -37,22 +38,31 @@ camelCaseTitle = (title) => {
 }
 
 export function submitQuiz(title) {
-  return AsyncStorage.setItem(camelCaseTitle(title), JSON.stringify({
-    title,
-    questions: []
+  return AsyncStorage.mergeItem(QUIZ_STORAGE_KEY, JSON.stringify({
+    [camelCaseTitle(title)]: {
+      title,
+      questions: []
+    }
   }));
 }
 
 export function submitQuestion(title, question) {
   const questionList = getQuiz(title).questions
-  return AsyncStorage.mergeItem(camelCaseTitle(title), JSON.stringify({
-    questions: [
-      question,
-      ...questionList
-    ]
+  return AsyncStorage.mergeItem(QUIZ_STORAGE_KEY, JSON.stringify({
+    [camelCaseTitle(title)]: {
+      questions: [
+        question,
+        ...questionList
+      ]
+    }
   }));
 }
 
 export function getQuiz(title) {
-  return AsyncStorage.getItem(camelCaseTitle(title));
+  return AsyncStorage.getItem(QUIZ_STORAGE_KEY)[camelCaseTitle(title)];
+}
+
+export function getQuizzes() {
+  return AsyncStorage.getItem(QUIZ_STORAGE_KEY)
+    .then(results => JSON.parse(results));
 }

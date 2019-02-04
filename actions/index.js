@@ -2,7 +2,7 @@ export const RECEIVE_QUIZZES = 'RECEIVE_ENTRIES';
 export const ADD_QUIZ = 'ADD_ENTRY';
 export const ADD_QUESTION_TO_QUIZ = 'ADD_ENTRY';
 
-export function receiveQuizzes(decks) {
+export function receiveQuizzes(quizzes) {
   // store the list of decks/quizzes
   return {
     type: RECEIVE_QUIZZES,
