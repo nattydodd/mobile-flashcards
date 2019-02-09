@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { getDecks, clearAll } from '../utils/api';
 import { receiveDecks } from '../actions';
@@ -47,10 +47,18 @@ class Home extends Component {
         {Object.keys(decks).map(item => {
           const deck = decks[item];
           return (
-            <DeckItem
+            <TouchableOpacity
               key={deck.title}
-              title={deck.title}
-            />
+              onPress={() => {
+                this.props.navigation.navigate(
+                'DeckStart',
+                { title: deck.title }
+              )}}
+            >
+              <DeckItem
+                title={deck.title}
+              />
+            </TouchableOpacity>
           )
         })}
       </View>

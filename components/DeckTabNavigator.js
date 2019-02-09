@@ -1,8 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
-import Home from './Home';
-import NewDeck from './NewDeck';
+import DeckStart from './DeckStart';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import NewCard from './NewCard';
 import { highlight, inactive, primary } from '../utils/colors';
 
 const BottomTabNavigatorConfig = {
@@ -13,19 +14,19 @@ const BottomTabNavigatorConfig = {
   }
 }
 
-const TabNavigator = createBottomTabNavigator({
-  Home: {
-    screen: Home,
+const DeckTabNavigator = createBottomTabNavigator({
+  DeckStart: {
+    screen: DeckStart,
     navigationOptions: {
-      tabBarIcon: ({ tintColor }) => <Ionicons name="ios-apps" size={25} color={tintColor} />
+      tabBarIcon: ({ tintColor }) => <FontAwesome name="square" size={25} color={tintColor} />
     }
   },
-  NewDeck: {
-    screen: NewDeck ,
+  NewCard: {
+    screen: NewCard,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Ionicons name="ios-add" size={35} color={tintColor} />
     }
   },
 }, BottomTabNavigatorConfig);
 
-export default createAppContainer(TabNavigator);
+export default createAppContainer(DeckTabNavigator);

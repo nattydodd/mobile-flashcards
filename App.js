@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import TabNavigator from './components/TabNavigator';
+import StackNavigator from './components/StackNavigator';
 import reducer from './reducers';
 
 export default class App extends React.Component {
@@ -10,7 +10,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-          <TabNavigator/>
+          <StackNavigator/>
         </View>
       </Provider>
     );
