@@ -1,6 +1,7 @@
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import MainTabNavigator from './MainTabNavigator';
-import DeckTabNavigator from "./DeckTabNavigator";
+import DeckTabNavigator from './DeckTabNavigator';
+import Card from './Card';
 
 const StackNavigator = createStackNavigator({
   Home: {
@@ -8,6 +9,9 @@ const StackNavigator = createStackNavigator({
   },
   DeckStart: {
     screen: DeckTabNavigator,
+  },
+  Card: {
+    screen: Card
   }
 });
 
