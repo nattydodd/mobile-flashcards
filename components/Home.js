@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { getDecks } from '../utils/api';
+import { getDecks, clearAll } from '../utils/api';
 import { receiveDecks } from '../actions';
 import { primary, white, background } from '../utils/colors';
 
@@ -25,7 +25,6 @@ class Home extends Component {
 
   render() {
     const { decks } = this.props;
-    console.log(decks);
 
     if (!decks) {
       return (
@@ -45,11 +44,15 @@ class Home extends Component {
 
     return (
       <View style={styles.container}>
-        {Object.keys(decks).map(deck => (
-          <DeckItem
-            title={deck.title}
-          />
-        ))}
+        {Object.keys(decks).map(item => {
+          const deck = decks[item];
+          return (
+            <DeckItem
+              key={deck.title}
+              title={deck.title}
+            />
+          )
+        })}
       </View>
     );
   }
