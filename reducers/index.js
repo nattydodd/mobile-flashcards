@@ -1,24 +1,24 @@
-import { RECEIVE_QUIZZES, ADD_QUIZ, ADD_QUESTION_TO_QUIZ } from '../actions';
+import { RECEIVE_DECKS, ADD_DECK, ADD_CARD_TO_DECK } from '../actions';
 
-function quizzes(state = {}, action) {
+function decks(state = {}, action) {
   switch(action.type) {
-    case RECEIVE_QUIZZES:
+    case RECEIVE_DECKS:
       return {
         ...state,
-        ...action.quizzes
+        ...action.decks
       }
-    case ADD_QUIZ:
+    case ADD_DECK:
       return {
         ...state,
-        ...action.quiz
+        ...action.deck
       }
-    case ADD_QUESTION_TO_QUIZ:
+    case ADD_CARD_TO_DECK:
       return {
         ...state,
-        [action.question.quizId]: {
-          questions: [
-            ...state[action.question.quizId].questions,
-            action.question
+        [action.card.deckId]: {
+          cards: [
+            ...state[action.card.deckId].cards,
+            action.card
           ]
         }
       }
@@ -27,4 +27,4 @@ function quizzes(state = {}, action) {
   }
 }
 
-export default quizzes;
+export default decks;

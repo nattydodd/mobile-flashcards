@@ -4,14 +4,14 @@ import { AsyncStorage } from 'react-native';
 // {
 //   React: {
 //     title: 'React',
-//     questions: [
+//     cards: [
 //       {
-//         quizId: 'React'
+//         deckId: 'React'
 //         question: 'What is React?',
 //         answer: 'A library for managing user interfaces'
 //       },
 //       {
-//         quizId: 'React',
+//         deckId: 'React',
 //         question: 'Where do you make Ajax requests in React?',
 //         answer: 'The componentDidMount lifecycle event'
 //       }
@@ -19,9 +19,9 @@ import { AsyncStorage } from 'react-native';
 //   },
 //   JavaScript: {
 //     title: 'JavaScript',
-//     questions: [
+//     cards: [
 //       {
-//         quizId: 'JavaScript'
+//         deckId: 'JavaScript'
 //         question: 'What is a closure?',
 //         answer: 'The combination of a function and the lexical environment within which that function was declared.'
 //       }
@@ -29,7 +29,7 @@ import { AsyncStorage } from 'react-native';
 //   }
 // }
 
-const QUIZ_STORAGE_KEY = 'MobileFlashCards:quizzes'
+const DECK_STORAGE_KEY = 'MobileFlashCards:decks'
 
 camelCaseTitle = (title) => {
   return title.replace(/\W+(.)/g, (match, chr) => {
@@ -37,32 +37,32 @@ camelCaseTitle = (title) => {
   });
 }
 
-export function submitQuiz(title) {
-  return AsyncStorage.mergeItem(QUIZ_STORAGE_KEY, JSON.stringify({
+export function submitDeck(title) {
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
     [camelCaseTitle(title)]: {
       title,
-      questions: []
+      cards: []
     }
   }));
 }
 
-export function submitQuestion(title, question) {
-  const questionList = getQuiz(title).questions
-  return AsyncStorage.mergeItem(QUIZ_STORAGE_KEY, JSON.stringify({
+export function submitCard(title, card) {
+  const cardList = getDeck(title).cards
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
     [camelCaseTitle(title)]: {
-      questions: [
-        question,
-        ...questionList
+      cards: [
+        card,
+        ...cardList
       ]
     }
   }));
 }
 
-export function getQuiz(title) {
-  return AsyncStorage.getItem(QUIZ_STORAGE_KEY)[camelCaseTitle(title)];
+export function getDeck(title) {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)[camelCaseTitle(title)];
 }
 
-export function getQuizzes() {
-  return AsyncStorage.getItem(QUIZ_STORAGE_KEY)
+export function getDecks() {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then(results => JSON.parse(results));
 }

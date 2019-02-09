@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { getQuizzes, submitQuiz } from '../utils/api';
-import { receiveQuizzes } from '../actions';
+import { getDecks } from '../utils/api';
+import { receiveDecks } from '../actions';
 
 class Home extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
 
-    getQuizzes()
-      .then(quizzes => dispatch(receiveQuizzes(quizzes)))
+    getDecks()
+      .then(decks => dispatch(receiveDecks(decks)))
       .catch(error => console.log(error));
   }
 
   render() {
-    const { quizzes } = this.props;
+    const { decks } = this.props;
 
-    if (!quizzes) {
+    if (!decks) {
       return (
         <View>
           <Text>Loading...</Text>
@@ -29,17 +29,17 @@ class Home extends Component {
       <View>
         <Text>Home</Text>
         {/* Components: Decks List, Deck, Button, Bottom Nav */}
-        {Object.keys(quizzes).map(quiz => (
-          <Text key={quiz}>{quiz}</Text>
+        {Object.keys(decks).map(deck => (
+          <Text key={deck}>{deck}</Text>
         ))}
       </View>
     );
   }
 }
 
-function mapStateToProps(quizzes) {
+function mapStateToProps(decks) {
   return {
-    quizzes
+    decks
   }
 }
 

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
-class QuizStart extends Component {
+class DeckStart extends Component {
   render() {
     return (
       <View>
-        <Text>Start Quiz</Text>
+        <Text>Start Deck</Text>
         {/* Components: Button, Button, TopNavWithBackButton */}
       </View>
     );
   }
 }
 
-export default QuizStart;
+export default DeckStart;

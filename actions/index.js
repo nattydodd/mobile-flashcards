@@ -1,25 +1,25 @@
-export const RECEIVE_QUIZZES = 'RECEIVE_ENTRIES';
-export const ADD_QUIZ = 'ADD_ENTRY';
-export const ADD_QUESTION_TO_QUIZ = 'ADD_ENTRY';
+export const RECEIVE_DECKS = 'RECEIVE_DECKS';
+export const ADD_DECK = 'ADD_DECK';
+export const ADD_CARD_TO_DECK = 'ADD_CARD';
 
-export function receiveQuizzes(quizzes) {
-  // store the list of decks/quizzes
+export function receiveDecks(decks) {
+  // store the list of decks
   return {
-    type: RECEIVE_QUIZZES,
-    quizzes
+    type: RECEIVE_DECKS,
+    decks
   }
 }
 
-export function addQuiz(quiz) {
+export function addDeck(deck) {
   return {
-    type: ADD_QUIZ,
-    quiz
+    type: ADD_DECK,
+    deck
   }
 }
 
-export function addQuestionToQuiz(question) {
+export function addCardToDeck(card) {
   return {
-    type: ADD_QUESTION_TO_QUIZ,
-    question
+    type: ADD_CARD_TO_DECK,
+    card
   }
 }
