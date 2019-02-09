@@ -3,6 +3,15 @@ import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { getDecks } from '../utils/api';
 import { receiveDecks } from '../actions';
+import { primary, white, background } from '../utils/colors';
+
+const DeckItem = (props) => {
+  return (
+    <View style={styles.deckItem}>
+      <Text style={{color: white, fontWeight: 'bold', textAlign: 'center'}}>{props.title}</Text>
+    </View>
+  )
+}
 
 class Home extends Component {
 
@@ -16,6 +25,7 @@ class Home extends Component {
 
   render() {
     const { decks } = this.props;
+    console.log(decks);
 
     if (!decks) {
       return (
@@ -25,12 +35,20 @@ class Home extends Component {
       );
     }
 
+    if (!Object.keys(decks).length) {
+      return (
+        <View style={styles.container}>
+          <Text>You have not created any decks yet! Click the plus button below to create one.</Text>
+        </View>
+      );
+    }
+
     return (
-      <View>
-        <Text>Home</Text>
-        {/* Components: Decks List, Deck, Button, Bottom Nav */}
+      <View style={styles.container}>
         {Object.keys(decks).map(deck => (
-          <Text key={deck}>{deck}</Text>
+          <DeckItem
+            title={deck.title}
+          />
         ))}
       </View>
     );
@@ -45,3 +63,27 @@ function mapStateToProps(decks) {
 
 
 export default connect(mapStateToProps)(Home);
+
+const styles = {
+  container: {
+    backgroundColor: background,
+    padding: 20,
+    paddingTop: 40,
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around'
+
+  },
+  deckItem : {
+    height: 100,
+    width: 100,
+    borderRadius: 10,
+    backgroundColor: primary,
+    padding: 10,
+    marginVertical: 10,
+    marginRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+}
