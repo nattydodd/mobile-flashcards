@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, TouchableHighlight } from 'react-native';
 import TextButton from './form-elements/TextButton';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 class Card extends Component {
   state = {
@@ -20,6 +21,14 @@ class Card extends Component {
     }));
   }
 
+  finishQuiz() {
+    // Since they finished a quiz, don't send the study reminder today :)
+    // Clear it and set it again for tomorrow
+    clearLocalNotification()
+      .then(setLocalNotification);
+    this.props.navigation.navigate('Home');
+  }
+
   render() {
     const { deckTitle, cards } = this.props.navigation.state.params;
     const { currentCard, showAnswer, score } = this.state;
@@ -32,7 +41,7 @@ class Card extends Component {
           <View>
             <Text>You're Finished!</Text>
               <TextButton
-                onPress={() => this.props.navigation.navigate('Home')}
+                onPress={this.finishQuiz.bind(this)}
               >
                 Back to Home
               </TextButton>
@@ -78,7 +87,6 @@ class Card extends Component {
             }
           </View>
         }
-        {/* Components: TopNavWithForwardBack */}
       </View>
     );
   }

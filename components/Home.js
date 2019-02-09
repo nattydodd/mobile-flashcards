@@ -48,11 +48,11 @@ class Home extends Component {
 
     return (
       <View style={styles.container}>
-        {Object.keys(decks).map(item => {
+        {Object.keys(decks).map((item, index) => {
           const deck = decks[item];
           return (
             <TouchableOpacity
-              key={deck.title}
+              key={index}
               onPress={() => {
                 this.props.navigation.navigate(
                 'DeckStart',
