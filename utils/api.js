@@ -38,30 +38,36 @@ camelCaseTitle = (title) => {
 }
 
 export function submitDeck(title) {
-  const entry = {
+  const deck = {
     [camelCaseTitle(title)]: {
       title,
       cards: []
     }
   }
-  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(entry))
-    .then(() => entry);
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(deck))
+    .then(() => deck);
 }
 
-export function submitCard(title, card) {
-  const cardList = getDeck(title).cards
-  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
-    [camelCaseTitle(title)]: {
+export async function submitCard(card) {
+  const deck = await getDeck(card.deckId);
+  const updatedDeck = {
+    [deck.title]: {
+      ...deck,
       cards: [
         card,
-        ...cardList
+        ...deck.cards
       ]
     }
-  }));
+  }
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(updatedDeck))
+    .then(() => card);
 }
 
 export function getDeck(title) {
-  return AsyncStorage.getItem(DECK_STORAGE_KEY)[camelCaseTitle(title)];
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
+    .then(decks => {
+      return JSON.parse(decks)[title];
+    });
 }
 
 export function getDecks() {

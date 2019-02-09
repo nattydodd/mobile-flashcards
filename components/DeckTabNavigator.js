@@ -22,7 +22,7 @@ const DeckTabNavigator = createBottomTabNavigator({
     }
   },
   NewCard: {
-    screen: NewCard,
+    screen: props => <NewCard {...props} />,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Ionicons name="ios-add" size={35} color={tintColor} />
     }

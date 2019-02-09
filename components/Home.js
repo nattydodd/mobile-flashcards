@@ -52,7 +52,10 @@ class Home extends Component {
               onPress={() => {
                 this.props.navigation.navigate(
                 'DeckStart',
-                { title: deck.title }
+                {
+                  deckTitle: deck.title,
+                  cards: deck.cards
+                }
               )}}
             >
               <DeckItem
@@ -71,7 +74,6 @@ function mapStateToProps(decks) {
     decks
   }
 }
-
 
 export default connect(mapStateToProps)(Home);
 
