@@ -43,7 +43,7 @@ class NewCard extends Component {
         <TextButton
           onPress={this.createCard.bind(this)}
         >
-          Create Deck
+          Create Card
         </TextButton>
         {/* Components: InputField, Button, TopNavWithBackButton */}
       </View>

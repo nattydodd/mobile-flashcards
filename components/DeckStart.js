@@ -11,13 +11,7 @@ class DeckStart extends Component {
     return (
       <View>
         <Text>{deckTitle}</Text>
-        {cards.map((card, index) => {
-          return (
-            <Text key={index}>
-              {card.question}
-            </Text>
-          )
-        })}
+        <Text>{cards.length} Questions</Text>
         <TextButton
           onPress={() => {
             this.props.navigation.navigate(

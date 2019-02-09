@@ -29,7 +29,14 @@ class Card extends Component {
         <Text>{deckTitle}</Text>
         <Text>Score {score} out of {cards.length}</Text>
         {currentCard + 1 > cards.length ?
-          <Text>You're Finished!</Text>
+          <View>
+            <Text>You're Finished!</Text>
+              <TextButton
+                onPress={() => this.props.navigation.navigate('Home')}
+              >
+                Back to Home
+              </TextButton>
+          </View>
         :
           <View>
             <Text>Question {currentCard + 1} of {cards.length}</Text>

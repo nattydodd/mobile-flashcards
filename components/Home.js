@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getDecks, clearAll } from '../utils/api';
 import { receiveDecks } from '../actions';
 import { primary, white, background } from '../utils/colors';
+import { AppLoading } from 'expo';
 
 const DeckItem = (props) => {
   return (
@@ -14,24 +15,27 @@ const DeckItem = (props) => {
 }
 
 class Home extends Component {
+  state = {
+    ready: false
+  }
 
   componentDidMount() {
     const { dispatch } = this.props;
 
     getDecks()
-      .then(decks => dispatch(receiveDecks(decks)))
+      .then(decks => {
+        dispatch(receiveDecks(decks));
+        this.setState(() => ({ ready: true }));
+      })
       .catch(error => console.log(error));
   }
 
   render() {
     const { decks } = this.props;
+    const { ready } = this.state;
 
-    if (!decks) {
-      return (
-        <View>
-          <Text>Loading...</Text>
-        </View>
-      );
+    if (ready === false) {
+      return <AppLoading />
     }
 
     if (!Object.keys(decks).length) {
