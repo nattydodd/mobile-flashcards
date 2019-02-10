@@ -16,6 +16,7 @@ function decks(state = {}, action) {
       return {
         ...state,
         [action.card.deckId]: {
+          ...state[action.card.deckId],
           cards: [
             ...state[action.card.deckId].cards,
             action.card

@@ -10,20 +10,33 @@ class DeckStart extends Component {
   render() {
     const { deckTitle } = this.props.navigation.state.params;
     const { cards } = this.props.decks[deckTitle];
+
     return (
       <View style={styles.container}>
         <MaterialCommunityIcons name="cards" size={200} color={highlight} />
-        <Text>{deckTitle}</Text>
-        <Text>{cards.length} Question{cards.length > 1 ? 's' : ''}</Text>
-        <TextButton
-          onPress={() => {
-            this.props.navigation.navigate(
-            'Card',
-            { deckTitle, cards }
-          )}}
-        >
-          Start Quiz
-        </TextButton>
+        <Text style={styles.title}>{deckTitle}</Text>
+        {cards.length === 0 ?
+          <View>
+            <Text style={styles.text}>
+              You have not created any cards yet for this deck! Click the plus button below to create one.
+            </Text>
+          </View>
+        :
+          <View>
+            <Text style={styles.text}>
+              {cards.length} Question{cards.length > 1 ? 's' : ''}
+            </Text>
+            <TextButton
+              onPress={() => {
+                this.props.navigation.navigate(
+                'Cards',
+                { deckTitle, cards }
+              )}}
+            >
+              Start Quiz
+            </TextButton>
+          </View>
+        }
       </View>
     );
   }
@@ -42,6 +55,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: backgroundSecondary
+    backgroundColor: backgroundSecondary,
+    padding: 20,
+    paddingTop: 0
+  },
+  title: {
+    fontSize: 18,
+    textAlign: 'center',
+    paddingBottom: 20
+  },
+  text: {
+    textAlign: 'center'
   }
 });

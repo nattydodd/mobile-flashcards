@@ -7,7 +7,7 @@ import Answer from './Answer';
 import Question from './Question';
 import { backgroundSecondary } from '../utils/colors';
 
-class Card extends Component {
+class Cards extends Component {
   state = {
     currentCard: 0,
     answer: '',
@@ -44,9 +44,6 @@ class Card extends Component {
         <Text style={styles.stats}>
           Score: {score} out of {cards.length}
         </Text>
-        <Text style={[styles.stats, { paddingBottom: 30}]}>
-          Question {currentCard + 1} of {cards.length}
-        </Text>
         {currentCard + 1 > cards.length ?
           <View style={{alignItems: 'center'}}>
             <CenteredTitle>You're Finished!</CenteredTitle>
@@ -58,6 +55,9 @@ class Card extends Component {
           </View>
         :
           <View>
+            <Text style={[styles.stats, { paddingBottom: 30}]}>
+              Question {currentCard + 1} of {cards.length}
+            </Text>
             {showAnswer ?
               <Answer
                 onPress={this.next.bind(this)}
@@ -80,7 +80,7 @@ class Card extends Component {
   }
 }
 
-export default Card;
+export default Cards;
 
 const styles = StyleSheet.create({
   card: {

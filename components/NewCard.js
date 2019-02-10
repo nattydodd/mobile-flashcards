@@ -22,6 +22,10 @@ class NewCard extends Component {
       })
       .then(card => {
         dispatch(addCardToDeck(card));
+        this.setState(() => ({
+          question: '',
+          answer: ''
+        }));
         this.props.navigation.navigate('DeckStart');
       })
       .catch(error => console.log(error));
@@ -47,10 +51,10 @@ class NewCard extends Component {
         />
         <TextButton
           onPress={this.createCard.bind(this)}
+          disabled={this.state.question === '' || this.state.answer === ''}
         >
           Create Card
         </TextButton>
-        {/* Components: InputField, Button, TopNavWithBackButton */}
       </View>
     );
   }

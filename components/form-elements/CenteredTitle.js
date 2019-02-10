@@ -7,7 +7,6 @@ export default function CenteredTitle({ children }) {
     <View style={styles.container}>
       <Text style={styles.title}>{children}</Text>
     </View>
-
   )
 }
 

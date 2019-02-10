@@ -20,6 +20,9 @@ class NewDeck extends Component {
     submitDeck(title)
       .then(deck => {
         dispatch(addDeck(deck));
+        this.setState(() => ({
+          title: '',
+        }));
         this.props.navigation.navigate('Home');
       })
       .catch(error => console.log(error));
@@ -37,6 +40,7 @@ class NewDeck extends Component {
           label='Title:'
         />
         <TextButton
+          disabled={this.state.title === ''}
           onPress={this.createDeck.bind(this)}
         >
           Create Deck

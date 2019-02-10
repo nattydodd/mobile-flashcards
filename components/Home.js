@@ -5,6 +5,7 @@ import { getDecks, clearAll } from '../utils/api';
 import { receiveDecks } from '../actions';
 import { primary, white, background } from '../utils/colors';
 import { AppLoading } from 'expo';
+import CenteredTitle from './form-elements/CenteredTitle';
 
 const DeckItem = (props) => {
   return (
@@ -41,7 +42,9 @@ class Home extends Component {
     if (!Object.keys(decks).length) {
       return (
         <View style={styles.container}>
-          <Text>You have not created any decks yet! Click the plus button below to create one.</Text>
+          <CenteredTitle>
+            You have not created any decks yet! Click the plus button below to create one.
+          </CenteredTitle>
         </View>
       );
     }
@@ -90,7 +93,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around'
-
   },
   deckItem : {
     height: 100,

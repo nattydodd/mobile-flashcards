@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import DeckStart from './DeckStart';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import NewCard from './NewCard';
-import { highlight, inactive, primary } from '../utils/colors';
+import { highlight, inactive } from '../utils/colors';
 
 const BottomTabNavigatorConfig = {
   tabBarOptions: {

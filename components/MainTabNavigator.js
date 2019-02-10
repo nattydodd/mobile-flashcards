@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Home from './Home';
 import NewDeck from './NewDeck';
-import { highlight, inactive, primary } from '../utils/colors';
+import { highlight, inactive } from '../utils/colors';
 
 const BottomTabNavigatorConfig = {
   tabBarOptions: {
