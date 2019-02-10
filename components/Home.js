@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { getDecks, clearAll } from '../utils/api';
 import { receiveDecks } from '../actions';
@@ -81,7 +81,7 @@ function mapStateToProps(decks) {
 
 export default connect(mapStateToProps)(Home);
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     backgroundColor: background,
     padding: 20,
@@ -103,4 +103,4 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center'
   }
-}
+});

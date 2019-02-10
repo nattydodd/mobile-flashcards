@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import TextButton from './form-elements/TextButton';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import CenteredTitle from './form-elements/CenteredTitle';
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
+import Answer from './Answer';
+import Question from './Question';
+import { backgroundSecondary } from '../utils/colors';
 
 class Card extends Component {
   state = {
@@ -34,12 +37,19 @@ class Card extends Component {
     const { currentCard, showAnswer, score } = this.state;
 
     return (
-      <View>
-        <Text>{deckTitle}</Text>
-        <Text>Score {score} out of {cards.length}</Text>
+      <View style={styles.card}>
+        <Text style={styles.title}>
+          {deckTitle}
+        </Text>
+        <Text style={styles.stats}>
+          Score: {score} out of {cards.length}
+        </Text>
+        <Text style={[styles.stats, { paddingBottom: 30}]}>
+          Question {currentCard + 1} of {cards.length}
+        </Text>
         {currentCard + 1 > cards.length ?
-          <View>
-            <Text>You're Finished!</Text>
+          <View style={{alignItems: 'center'}}>
+            <CenteredTitle>You're Finished!</CenteredTitle>
               <TextButton
                 onPress={this.finishQuiz.bind(this)}
               >
@@ -48,42 +58,20 @@ class Card extends Component {
           </View>
         :
           <View>
-            <Text>Question {currentCard + 1} of {cards.length}</Text>
-            <Text>Question: {cards[currentCard].question}</Text>
             {showAnswer ?
-              <View>
-                <Text>Answer: {cards[currentCard].answer}</Text>
-                <Text>Where you right?</Text>
-                <TouchableHighlight
-                  onPress={() => this.next(0)}
-                >
-                  <FontAwesome
-                    name="times"
-                    size={25}
-                  />
-                </TouchableHighlight>
-                <TouchableHighlight
-                  onPress={() => this.next(1)}
-                >
-                  <FontAwesome
-                    name="check"
-                    size={25}
-                  />
-                </TouchableHighlight>
-              </View>
+              <Answer
+                onPress={this.next.bind(this)}
+                question={cards[currentCard].question}
+                answer={cards[currentCard].answer}
+                userAnswer={this.state.answer}
+              />
             :
-              <View>
-                <TextInput
-                  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                  onChangeText={(answer) => this.setState({answer})}
-                  value={this.state.answer}
-                />
-                <TextButton
-                  onPress={() => this.setState({ showAnswer: true })}
-                >
-                  Submit
-                </TextButton>
-              </View>
+              <Question
+                question={cards[currentCard].question}
+                updateAnswer={(answer) => this.setState({answer})}
+                inputValue={this.state.answer}
+                onSubmit={() => this.setState({ showAnswer: true })}
+              />
             }
           </View>
         }
@@ -93,3 +81,19 @@ class Card extends Component {
 }
 
 export default Card;
+
+const styles = StyleSheet.create({
+  card: {
+    flex: 1,
+    alignItems: 'center',
+    paddingTop: 30,
+    backgroundColor: backgroundSecondary
+  },
+  stats: {
+    fontSize: 18,
+    textAlign: 'center'
+  },
+  title: {
+    fontSize: 30
+  }
+});

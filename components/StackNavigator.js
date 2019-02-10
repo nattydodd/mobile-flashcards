@@ -14,14 +14,14 @@ const StackNavigator = createStackNavigator({
     screen: DeckTabNavigator,
     navigationOptions: () => ({
       headerBackTitle: null,
-      headerBackTitleStyle: { color: primary, fontSize: 14, paddingLeft: 5 },
-      headerBackImage: <Ionicons name="ios-arrow-round-back" size={25} style={{ color: primary, paddingLeft: 5, paddingTop: 2 }} />
+      headerBackTitleStyle: { color: primary, fontSize: 16, paddingLeft: 10 },
+      headerBackImage: <Ionicons name="ios-arrow-round-back" size={30} style={{ color: primary, paddingLeft: 10, paddingTop: 2 }} />
     }),
   },
   Card: {
     screen: Card,
     navigationOptions: () => ({
-      headerBackImage: <Ionicons name="ios-refresh" size={25} style={{ color: primary, paddingLeft: 5, paddingTop: 2 }} />
+      headerBackImage: <Ionicons name="ios-refresh" size={25} style={{ color: primary, paddingLeft: 10, paddingTop: 2 }} />
     }),
   }
 });
