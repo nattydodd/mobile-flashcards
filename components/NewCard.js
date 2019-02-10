@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import TextButton from './form-elements/TextButton';
 import CenteredTitle from './form-elements/CenteredTitle';
 import InputField from './form-elements/InputField';
 import { addCardToDeck } from '../actions';
 import { submitCard } from '../utils/api';
 import { connect } from 'react-redux';
+import { backgroundSecondary } from '../utils/colors';
 
 class NewCard extends Component {
   state = {
@@ -35,7 +36,7 @@ class NewCard extends Component {
   render() {
     const { deckTitle } = this.props.navigation.state.params;
     return (
-      <View>
+      <View style={styles.container}>
         <CenteredTitle>
           New Card for: {deckTitle}
         </CenteredTitle>
@@ -61,3 +62,11 @@ class NewCard extends Component {
 }
 
 export default connect()(NewCard);
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: backgroundSecondary,
+    padding: 20,
+    flex: 1
+  }
+});

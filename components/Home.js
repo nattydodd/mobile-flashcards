@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { getDecks, clearAll } from '../utils/api';
+import { getDecks } from '../utils/api';
 import { receiveDecks } from '../actions';
 import { primary, white, background } from '../utils/colors';
 import { AppLoading } from 'expo';
@@ -51,6 +51,9 @@ class Home extends Component {
 
     return (
       <View style={styles.container}>
+        <CenteredTitle>
+          Mobile Flashcards
+        </CenteredTitle>
         {Object.keys(decks).map((item, index) => {
           const deck = decks[item];
           return (
@@ -88,11 +91,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: background,
     padding: 20,
-    paddingTop: 40,
+    paddingTop: 0,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around'
+    justifyContent: 'space-evenly',
   },
   deckItem : {
     height: 100,
